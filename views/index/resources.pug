@@ -1,0 +1,32 @@
+extends public/layout
+
+block content
+    div(page="index-resource")
+        div.banner
+                    div.col-lg-6.col-lg-offset-1.col-md-6.col-md-offset-1.col-sm-6(class="text")
+                        h1 #{banner.title}
+                        p #{banner.text}
+                    div.col-lg-5.col-md-5.col-sm-5(class="image")
+
+        div.advantage
+            .box
+                img.center-block(src="../../images/resources/multi_language.png")
+                p.title #{advantage.language.title}
+                p.text #{advantage.language.text}
+            .box
+                img.center-block(src="../../images/resources/large_number.png")
+                p.title #{advantage.number.title}
+                p.text #{advantage.number.text}
+            .box
+                img.center-block(src="../../images/resources/wide_range.png")
+                p.title #{advantage.range.title}
+                p.text #{advantage.range.text}
+            .box
+                img.center-block(src="../../images/resources/multi_type.png")
+                p.title #{advantage.type.title}
+                p.text #{advantage.type.text}
+
+        .try
+            p.hunter #{experience.title}
+            p.service #{experience.service}
+            a(href="#{experience.href}", class="experience") #{experience.text}

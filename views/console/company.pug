@@ -1,0 +1,195 @@
+extends public/layout
+
+block content
+    link(href="/javascript/lib/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet")
+    link(href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet")
+    .container
+        .row(class="header")
+            span 监控产品
+                select
+                    option 微信
+                    option Keep
+                span(class="btn-span")
+                    button(class="active"  data-value="introduction") 企业信息
+                    button(data-value="production") 产品运营
+                    button(data-value="information") 相关资讯
+                div(class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="loading" aria-hidden="true")
+                    div(class="modal-dialog modal-sm")
+                        div(class="modal-content") 数据加载中......
+
+    div(class="page-container")
+
+        //- 产品运营页面布局
+
+        div(id="production-page" style="display:none")
+            .container(class="production-first-setion content-container")
+                .row
+                    .col-md-6.col-sm-12
+                        div(id="production-download")
+                    .col-md-6.col-sm-12
+                        div(id="production-score")
+
+            .container(class="production-second-setion content-container")
+                .row(class="production-second-setion-header")
+                    input(type="text" name="reservation" id="reservation" class="calenders" value="")
+                    span(class="caret")
+                    ul
+                        li
+                            a(href="#" class='active')='安卓'
+                        li
+                            a(href="#")='百度'
+                        li
+                            a(href="#")='360'
+                        li
+                            a(href='#')='豌豆荚'
+                        li
+                            a(href='#')='联想'
+                        li
+                            a(href='#')='魅族'
+                        li
+                            a(href='#')='华为'
+                        li
+                            a(href='#')='应用汇'
+                        li
+                            a(href='#')='安卓'
+                        li
+                            a(href='#')='百度'
+                        li
+                            a(href='#')='360'
+                        li
+                            a(href='#')='豌豆荚'
+                        li
+                            a(href='#')='联想'
+                        li
+                            a(href='#')='魅族'
+                        li
+                            a(href='#')='华为'
+                .row
+                    .col-md-6.col-sm-12
+                        div(id="production-download-trend")
+                    .col-md-6.col-sm-12
+                        div(id="production-rank-trend")
+
+        //- 企业信息页面布局
+
+        div(id="introduction-page")
+            .container(class="introduction-first-setion content-container")
+                .row
+                    .col-md-12.col-sm-12
+                        p(class = 'introduction-page-title')
+                            span(class="introduction-page-companyName") 
+                            img(src="/images/console/company/http.png")
+                            a(href="#" class="introduction-page-website") 
+                        p
+                            img(src="/images/console/company/chat.png")
+                            span(class="introduction-page-business")
+                        p
+                            img(src="/images/console/company/address.png")
+                            span(class="introduction-page-locate")
+                        p(class="introduction-page-briefIntroduction")
+
+            .container(class="introduction-second-setion content-container")
+                .row
+                    .col-md-12.col-sm-12
+                        div(id="introduction-price-trend")
+                .row
+                    .col-md-12.col-sm-12
+                        table(class="table")
+
+        //- 相关资讯页面布局
+
+        div(id="information-page" style="display:none")
+            .container(class="information-first-setion content-container")
+                .row(class="information-first-setion-header")
+                        input(type="text" name="reservation" id="selection" class="calenders" value="")
+                        span(class="caret")
+                        .col-md-offset-3
+                            label(class="checkbox-inline")
+                                input(type="checkbox" id="inlineCheckbox1" value="option1")
+                                span 新闻
+                            label(class="checkbox-inline")
+                                input(type="checkbox" id="inlineCheckbox2" value="option2")
+                                span 微博
+                            label(class="checkbox-inline")
+                                input(type="checkbox" id="inlineCheckbox3" value="option3")
+                                span 论坛
+                            label(class="checkbox-inline")
+                                input(type="checkbox" id="inlineCheckbox4" value="option4")
+                                span 博客
+                            label(class="checkbox-inline")
+                                input(type="checkbox" id="inlineCheckbox5" value="option5")
+                                span 贴吧
+                            label(class="checkbox-inline")
+                                input(type="checkbox" id="inlineCheckbox6" value="option6")
+                                span 视频
+
+                .row
+                    .col-md-12.col-sm-12
+                        div(id="information-trend")
+
+            .container(class="information-second-setion content-container")
+                .row
+                    a.newlink(href="#" target="_blank")
+                        .col-md-5.col-sm-12.media(class="news_container")
+                            img.media-object(src='/images/console/industry_information/news_picture.png')
+                            div.media-body
+                                h5
+                                h6
+                                    span(class="publisher")
+                                    span(class="date")
+                                p
+                    a.newlink(href="#" target="_blank")
+                        .col-md-5.col-sm-12.col-md-offset-1.media(class="news_container")
+                            img.media-object(src='/images/console/industry_information/news_picture.png')
+                            div.media-body
+                                h5
+                                h6
+                                    span(class="publisher")
+                                    span(class="date")
+                                p
+                .row
+                    a.newlink(href="#" target="_blank")
+                        .col-md-5.col-sm-12.media(class="news_container")
+                            img.media-object(src='/images/console/industry_information/news_picture.png')
+                            div.media-body
+                                h5
+                                h6
+                                    span(class="publisher")
+                                    span(class="date")
+                                p
+                    a.newlink(href="#" target="_blank")
+                        .col-md-5.col-sm-12.col-md-offset-1.media(class="news_container")
+                            img.media-object(src='/images/console/industry_information/news_picture.png')
+                            div.media-body
+                                h5
+                                h6
+                                    span(class="publisher")
+                                    span(class="date")
+                                p
+                .row
+                    a.newlink(href="#" target="_blank")
+                        .col-md-5.col-sm-12.media(class="news_container")
+                            img.media-object(src='/images/console/industry_information/news_picture.png')
+                            div.media-body
+                                h5
+                                h6
+                                    span(class="publisher")
+                                    span(class="date")
+                                p
+                    a.newlink(href="#" target="_blank")
+                        .col-md-5.col-sm-12.col-md-offset-1.media(class="news_container")
+                            img.media-object(src='/images/console/industry_information/news_picture.png')
+                            div.media-body
+                                h5
+                                h6
+                                    span(class="publisher")
+                                    span(class="date")
+                                p
+
+
+
+
+
+
+
+

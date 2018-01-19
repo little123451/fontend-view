@@ -1,0 +1,33 @@
+* {
+  font-family: "Microsoft YaHei", Serif;
+}
+.navbar {
+
+  background-color: #34495E;
+  border-bottom: 1px solid #405973;
+  border-radius: 0;
+  
+  .container-fluid .navbar-brand{
+    margin-left: 40px;
+  }
+
+  .navbar-nav {
+    .active {
+      background-color: #34495E;
+      color: cyan;
+      border-bottom-style: solid;
+    }
+    li {
+      margin-top: 10px;
+      font-size: 16px;
+      a {
+        color: #fff;
+        &:hover, &:focus {.active }
+      }
+    }
+  }
+
+  .navbar-right {
+    margin-right: 25px;
+  }
+}

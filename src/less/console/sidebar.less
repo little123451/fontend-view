@@ -1,0 +1,48 @@
+@highlight-blue: #36f8ff;
+@sidebar-font-color: #a7a7a7;
+@sidebar-background-color: #293038;
+@sidebar-background-color-hover:#232930;
+
+#console-sidebar{
+	position: fixed;
+	background: @sidebar-background-color;
+	width: 165px;
+	.nav > li > a{
+		padding: 0 10px;
+
+		&:hover,
+		&:focus, &.active{
+			background: @sidebar-background-color-hover;
+			color: @highlight-blue;
+		}
+	}
+
+	li{
+		width: 100%;
+		height: 55px;
+		line-height: 55px;
+		border-left: 4px solid @sidebar-background-color;
+		&:hover{
+			border-left:4px solid @highlight-blue;
+			background-color: @sidebar-background-color-hover;
+		}
+
+	}
+	.change{
+		background-color: @sidebar-background-color-hover;
+		a{
+			background: @sidebar-background-color-hover;
+			color: @highlight-blue;
+		}
+	}
+	a{
+		color: @sidebar-font-color;
+		height: 55px;
+	}
+
+	img{
+		margin-left: 15px;
+		margin-right: 20px;
+		width: 16px;
+	}
+} 

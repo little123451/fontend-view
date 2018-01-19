@@ -1,0 +1,23 @@
+extends public/layout
+
+block content
+    div(page="users-login")
+        .wrapper
+            .logo
+                a(href="/")
+                    img(src="/images/users/login/logo.png")
+            .login-frame
+                form.form-horizontal(action="/users/login" method="post")
+                    div.form-group
+                        input.form-control(type="text" name="account" id="account" placeholder="手机号/邮箱")
+                        span.text 还没有账号？
+                            a(class="register-info" href="/users/register") 注册一个 >
+                    div.form-group
+                        input.form-control(type="password" name="password" id="password" placeholder="密码")
+                        a.text(href="/users/forget") 忘记密码？
+                    div.form-group
+                        button#submit.center-block.btn.btn-primary(type="submit") 立即登录
+                    div.msg
+                        if err
+                            p#err(class="err-msg")= err.msg
+            canvas(id="canvas")

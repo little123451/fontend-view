@@ -1,0 +1,124 @@
+@option-color: #686868;
+@selected-color: #35e5eb;
+@unselected-color: #5f7c98;
+@button-color: #4ec0ea;
+@red: #ff0000;
+@font-color:#ffffff;
+@success-color:#36f8ff;
+.roundedCorners(@radius:5px) {
+  -moz-border-radius: @radius;
+  -webkit-border-radius: @radius;
+  border-radius: @radius;
+}
+body{
+  background:url("../../images/register/bg.png");
+  background-size: cover;
+}
+.navbar{
+  background-color: inherit;
+  border-bottom: none;
+}
+div[page="users-register"]{
+  width:100%;
+
+  div.step {
+    text-align: center;
+    height: 40px;
+
+    ul { padding: 0 }
+    li {
+      display: inline-block;
+      border-bottom: 7px solid @unselected-color;
+      padding-bottom: 12px;
+      color: @unselected-color;
+      font-size: 17px;
+      text-align: center;
+      list-style: none;
+    }
+
+    .active {
+      color: @selected-color;
+      border-bottom: 7px solid @selected-color;
+    }
+  }
+
+  form.form-horizontal {
+    margin: 70px auto 0;
+    p.err-msg{ text-align: center}
+    label{ text-align: left;color: @font-color}
+    button{
+      width: 20%;
+      background-color: @button-color;
+      &:hover{
+        background-color: #65c9ee;
+        border:none;
+      }
+    }
+    input.form-control{
+      background-color: inherit;
+      color: @font-color;
+    }
+  }
+
+  #first-step label {
+    width: 105px;
+  }
+
+  #second-step {
+    display: none;
+
+    div.col-sm-3{
+      line-height: 40px;
+      input.radio{
+        margin-top: 9px;
+        float: left;
+        display: inline-block;
+        vertical-align: middle;
+      }
+      span.read {
+        margin-left: 6px;
+
+        color: @font-color;
+        vertical-align: middle;
+        a {
+          text-decoration: underline;
+          color: @selected-color;
+        }
+      }
+    }
+
+    .form-group label {
+      width: 120px;
+    }
+    select.form-control{
+      background-color: inherit;
+      color: @font-color;
+      option{
+        color: @option-color;
+      }
+    }
+  }
+
+  #third-step {
+    display: none;
+    margin: 0 auto;
+    img{
+      width: 80px;
+    }
+    p {
+      margin-top: 20px;
+      color: @font-color;
+      font-size: 17px;
+      text-align: center;
+
+      a {
+        color: @success-color;
+        text-decoration: none;
+      }
+    }
+  }
+
+  .err-msg {
+    color: @red;
+  }
+}

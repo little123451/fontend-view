@@ -1,0 +1,40 @@
+extends public/layout
+
+block content
+    div(page="index-custom")
+        .banner
+            .container
+                .row
+                    .text.col-sm-12.col-lg-5.col-lg-offset-1.col-md-6
+                        h1.title 定制平台
+                        p.text 根据客户给定数据需求，提供互联网公开数据定向采集分析、企业内部数据分析管理服务，以满足客户的个性化数据服务定制。
+                    .image.col-sm-12.col-lg-5.col-lg-offset-1.col-md-5.col-md-offset-1
+                canvas(id="canvas")
+
+        .analyze
+            .container
+                .row
+                    .text.col-lg-5.col-lg-offset-1.col-md-6.col-md-offset-1.col-sm-12
+                        h3.title 企业数据分析服务
+                        p.firstly 根据您的数据需求与相关的数据，为您专门定制私人的数据挖掘分析服务。
+                        p 例如：商业决策、用户画像、市场洞察、精准营销、信用评估、活动追踪等。
+                    .image.col-lg-4.col-lg-offset-2.col-md-4.col-md-offset-1.col-sm-12
+
+        .collect
+            .container
+                .row
+                    .image.col-lg-4.col-lg-offset-1.col-md-4.col-md-offset-1.col-sm-12
+                    .text.col-lg-5.col-lg-offset-2.col-md-6.col-md-offset-1.col-sm-12
+                        h3.title 定向数据采集服务
+                        p.firstly 根据您的数据需求，为您专门制定监测范围，定向采集数据，并汇总和分析媒体内容。
+                        p.
+                            您可用于：<br />
+                            掌握行业资讯   竞争情报监测<br />
+                            科研教学工作   事件传播路径分析<br />
+                            网站内容维护   社会网络挖掘<br />
+                            活动效果评估   目标人群社媒热点
+
+        .try
+            p.hunter 数据猎人
+            p.service 定义企业自身的商业情报监控服务
+            a(href="/users/login", class="experience") 立即体验

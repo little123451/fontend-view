@@ -1,0 +1,221 @@
+extends public/layout
+
+block content
+    .container(class="header")
+
+        .row(class="header-first-section")
+            span 监控行业
+            select
+                for item in industry
+                    option=item
+            span(class="time") 时间
+            button(data-value="12" data-period="1" class="active") 月度
+            button(data-value="2" data-period="2") 季度
+            button(data-value="3" data-period="3") 年度
+            div(class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="loading" aria-hidden="true")
+                div(class="modal-dialog modal-sm")
+                    div(class="modal-content") 数据加载中......
+
+        .row(class="header-second-section")
+            button(class="active" data-value="distribution") 分布
+            button(data-value="trend") 趋势
+            button(data-value="information") 资讯
+
+    div(class="page-container")
+
+        //- 趋势页面布局
+
+        div(id="trend-page"  style="display:none")
+            .container(class="industry-trend content-container")
+                span(class="chart-title") 行业趋势
+                .row
+                    .col-md-6.col-sm-12
+                        div(id="industry-finance-quantity-trend")
+                    .col-md-6.col-sm-12
+                        div(id="industry-finance-volume-trend")
+
+            .container(class="sub-industry-trend content-container")
+                span(class="chart-title") 子行业趋势
+                .row
+                    .col-md-12.col-sm-12
+                        div(id="sub-industry-finance-quantity-trend")
+                .row
+                    .col-md-12.col-sm-12
+                        div(id="sub-industry-finance-volume-trend")
+
+            .container(class="round-trend content-container")
+                span(class="chart-title") 轮次趋势
+                .row
+                    .col-md-6.col-sm-12
+                        div(id="round-finance-quantity-trend")
+                    .col-md-6.col-sm-12
+                        div(id="round-finance-volume-trend")
+
+            .container(class="area-trend content-container")
+                span(class="chart-title") 地域趋势
+                .row
+                    .col-md-6.col-sm-12
+                        div(id="spatial-finance-quantity-trend")
+                    .col-md-6.col-sm-12
+                        div(id="spatial-finance-volume-trend")
+
+        //- 分布页面布局
+
+        div(id="distribution-page")
+
+            .container(class="sub-industry-distribution content-container")
+                span(class="chart-title") 子行业分布
+                .row
+                    .col-md-6.col-sm-12
+                        div(id="sub-industry-finance-quantity-distribution")
+                    .col-md-6.col-sm-12
+                        div(id="sub-industry-finance-volume-distribution")
+
+            .container(class="round-distribution content-container")
+                span(class="chart-title") 轮次分布
+                .row
+                    .col-md-6.col-sm-12
+                        div(id="rounds-finance-quantity-distribution")
+                    .col-md-6.col-sm-12
+                        div(id="rounds-finance-volume-distribution")
+
+            .container(class="area-distribution content-container")
+                span(class="chart-title") 地域分布
+                .row
+                    .col-md-6.col-sm-12
+                        div(id="area-finance-quantity-distribution")
+                    .col-md-6.col-sm-12
+                        div(id="area-finance-volume-distribution")
+                .row
+                    .col-md-12.col-sm-12
+                        div(id="area-finance-distribution")
+                .row
+                    .col-md-6.col-sm-12
+                        div(id="province-finance-quantity-distribution")
+                    .col-md-6.col-sm-12
+                        div(id="province-finance-volume-distribution")
+
+        //- 资讯页面布局
+
+        div(id="information-page" style="display:none")
+            .container(class="content-container")
+                .row
+                    a.newlink(href="#" target="_blank")
+                        .col-md-5.col-sm-12.media(class="news_container")
+                            img.media-object(src='/images/console/industry_information/news_picture.png')
+                            div.media-body
+                                h5
+                                h6
+                                    span(class="publisher")
+                                    span(class="date")
+                                p
+                    a.newlink(href="#" target="_blank")
+                        .col-md-5.col-sm-12.col-md-offset-1.media(class="news_container")
+                            img.media-object(src='/images/console/industry_information/news_picture.png')
+                            div.media-body
+                                h5
+                                h6
+                                    span(class="publisher")
+                                    span(class="date")
+                                p
+                .row
+                    a.newlink(href="#" target="_blank")
+                        .col-md-5.col-sm-12.media(class="news_container")
+                            img.media-object(src='/images/console/industry_information/news_picture.png')
+                            div.media-body
+                                h5
+                                h6
+                                    span(class="publisher")
+                                    span(class="date")
+                                p
+                    a.newlink(href="#" target="_blank")
+                        .col-md-5.col-sm-12.col-md-offset-1.media(class="news_container")
+                            img.media-object(src='/images/console/industry_information/news_picture.png')
+                            div.media-body
+                                h5
+                                h6
+                                    span(class="publisher")
+                                    span(class="date")
+                                p
+                .row
+                    a.newlink(href="#" target="_blank")
+                        .col-md-5.col-sm-12.media(class="news_container")
+                            img.media-object(src='/images/console/industry_information/news_picture.png')
+                            div.media-body
+                                h5
+                                h6
+                                    span(class="publisher")
+                                    span(class="date")
+                                p
+                    a.newlink(href="#" target="_blank")
+                        .col-md-5.col-sm-12.col-md-offset-1.media(class="news_container")
+                            img.media-object(src='/images/console/industry_information/news_picture.png')
+                            div.media-body
+                                h5
+                                h6
+                                    span(class="publisher")
+                                    span(class="date")
+                                p
+                .row
+                    a.newlink(href="#" target="_blank")
+                        .col-md-5.col-sm-12.media(class="news_container")
+                            img.media-object(src='/images/console/industry_information/news_picture.png')
+                            div.media-body
+                                h5
+                                h6
+                                    span(class="publisher")
+                                    span(class="date")
+                                p
+                    a.newlink(href="#" target="_blank")
+                        .col-md-5.col-sm-12.col-md-offset-1.media(class="news_container")
+                            img.media-object(src='/images/console/industry_information/news_picture.png')
+                            div.media-body
+                                h5
+                                h6
+                                    span(class="publisher")
+                                    span(class="date")
+                                p
+                .row
+                    a.newlink(href="#" target="_blank")
+                        .col-md-5.col-sm-12.media(class="news_container")
+                            img.media-object(src='/images/console/industry_information/news_picture.png')
+                            div.media-body
+                                h5
+                                h6
+                                    span(class="publisher")
+                                    span(class="date")
+                                p
+                    a.newlink(href="#" target="_blank")
+                        .col-md-5.col-sm-12.col-md-offset-1.media(class="news_container")
+                            img.media-object(src='/images/console/industry_information/news_picture.png')
+                            div.media-body
+                                h5
+                                h6
+                                    span(class="publisher")
+                                    span(class="date")
+                                p
+                .row
+                    a.newlink(href="#" target="_blank")
+                        .col-md-5.col-sm-12.media(class="news_container")
+                            img.media-object(src='/images/console/industry_information/news_picture.png')
+                            div.media-body
+                                h5
+                                h6
+                                    span(class="publisher")
+                                    span(class="date")
+                                p
+                    a.newlink(href="#" target="_blank")
+                        .col-md-5.col-sm-12.col-md-offset-1.media(class="news_container")
+                            img.media-object(src='/images/console/industry_information/news_picture.png')
+                            div.media-body
+                                h5
+                                h6
+                                    span(class="publisher")
+                                    span(class="date")
+                                p
+            button(id="backTop")
+                p ∧
+            .col-md-11(class="information_page_bottom" style="display:none;")
+                button
+                    span(class="more") More
+                    span(class="v") v

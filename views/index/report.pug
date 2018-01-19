@@ -1,0 +1,19 @@
+extends public/layout
+
+block content
+ div.container(page="index-report")
+    for msg in fields
+        div.fields
+            div.fields-title: h2= msg.title
+            p.summary= msg.summary
+            for article in msg.article
+                a.article(href= article.url target="_blank")
+                    div.article-cover
+                        img(src=article.cover_pic height="120px")
+                    div.article-meta
+                        p.title= article.title
+                        p.summary= article.summary
+            a.more(href=msg.more)
+                span >
+                p More
+            div.clearfix

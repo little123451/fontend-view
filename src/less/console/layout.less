@@ -1,0 +1,44 @@
+/* 左侧固定,右侧自动伸缩,代码参考 http://www.cnblogs.com/dearxinli/p/3799094.html */
+
+@side-bar-width: 165px;
+@side-bar-background: #293038;
+@block-background: #f6f7f9;
+
+*{
+  padding: 0;
+  margin: 0;
+}
+
+#page-console {
+  float: left;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  background-color: @side-bar-background;
+}
+
+#container {
+  background-color: @block-background;
+  width: 100%;
+  float: left;
+  position: relative;
+  left: @side-bar-width;
+}
+
+#left {
+  float: left;
+  margin-right: -100%;
+  margin-left: -@side-bar-width;
+  width: @side-bar-width;
+}
+
+#content {
+  float: left;
+  width: 100%;
+  margin-left: -@side-bar-width;
+}
+
+#block {
+  margin-left: @side-bar-width;
+  overflow: hidden;
+}

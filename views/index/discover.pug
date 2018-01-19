@@ -1,0 +1,47 @@
+extends public/layout
+
+block content
+    div(page="index-discover")
+        div.banner
+            h1.col-lg-11.col-md-11.col-md-offset-1.col-sm-11.col-sm-offset-1 #{intro.title}
+            p.col-lg-6.col-md-8.col-md-offset-1.col-sm-9.col-sm-offset-1 #{intro.text}
+
+        div.info
+            .container
+                div.row
+                    div.col-lg-3.col-lg-offset-1.col-md-3.col-md-offset-1.col-sm-3
+                        .sub-title.tendency #{info.tendency.title}
+                        p #{info.tendency.text}
+                    div.col-lg-3.col-lg-offset-4.col-md-3.col-md-offset-4.col-sm-3.col-sm-offset-6
+                        .sub-title.image #{info.image.title}
+                        p #{info.image.text}
+                div.row
+                    div.col-lg-3.col-lg-offset-1.col-md-3.col-md-offset-1.col-sm-3
+                        .sub-title.intelligence #{info.intelligence.title}
+                        p #{info.intelligence.text}
+                    div.col-lg-3.col-lg-offset-4.col-md-3.col-md-offset-4.col-sm-3.col-sm-offset-6
+                        .sub-title.strategic #{info.strategic.title}
+                        p #{info.strategic.text}
+
+        .choose: p #{choose.text}
+
+        .section
+            .container
+                each reason in reasons
+                    .row
+                        div.col-lg-12.col-md-12.col-sm-12(class="reason")
+                            p.summary #{reason.title}
+                            p #{reason.text}
+
+        .widely
+            .container
+                for row in table
+                    .row
+                        for col in row
+                            .col-xs-3= col
+            p #{table_text.text}
+
+        .try
+            p.hunter #{experience.title}
+            p.service #{experience.service}
+            a(href="#{experience.href}", class="experience") #{experience.text}

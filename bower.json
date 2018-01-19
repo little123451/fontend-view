@@ -1,0 +1,24 @@
+{
+  "name": "frontend-view",
+  "description": "",
+  "main": "",
+  "authors": [
+    "BB_Wu <116988468@qq.com>"
+  ],
+  "license": "MIT",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/javascript/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "requirejs": "^2.2.0",
+    "jquery": "2.2.4",
+    "bootstrap-daterangepicker": "^2.1.24"
+  }
+}
