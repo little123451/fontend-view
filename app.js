@@ -1,18 +1,21 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var session = require('express-session');
-var bodyParser = require('body-parser');
+let express = require('express');
+let logger = require('morgan');
+let path = require('path');
+let favicon = require('serve-favicon');
+let cookieParser = require('cookie-parser');
+let session = require('express-session');
+let bodyParser = require('body-parser');
+let app = express();
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
-var consoleRouter = require('./routes/console');
+// 路由
+let routes = {
+  "index" : require('./routes/index'),
+  "api" : require('./routes/api')
+};
+app.use('/index', routes.index);
+app.use('/api', routes.api);
 
-var app = express();
-
-// view engine setup
+// 设置页面解析引擎
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
@@ -22,11 +25,14 @@ app.use(function (req, res, next) {
   next();
 });
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+// 日志记录
 app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+
+// Content-Type 的处理
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+
+// Cookies 的处理
 app.use(cookieParser());
 app.use(session({
   name : 'SESSIONID',
@@ -34,15 +40,14 @@ app.use(session({
   saveUninitialized: true,
   resave: false
 }));
-app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-app.use('/users', users);
-app.use('/console', consoleRouter);
+// 静态文件处理
+app.use(express.static(path.join(__dirname, 'public')));
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+  let err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
@@ -54,10 +59,10 @@ app.use(function(req, res, next) {
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    res.render('error', {
+    res.send(JSON.stringify({
       message: err.message,
       error: err
-    });
+    }));
   });
 }
 
@@ -65,10 +70,10 @@ if (app.get('env') === 'development') {
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
-  res.render('error', {
+  res.send(JSON.stringify({
     message: err.message,
     error: {}
-  });
+  }));
 });
 
 module.exports = app;

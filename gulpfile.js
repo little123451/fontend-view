@@ -1,15 +1,16 @@
-var gulp = require('gulp');
-var less = require('gulp-less');
-var mincss = require('gulp-clean-css');
-var rename = require('gulp-rename');
-var clean = require('gulp-clean');
-var nodemon = require('gulp-nodemon');
-var uglify = require('gulp-uglify');
-var sequence = require('gulp-sequence');
-var imagemin = require('gulp-imagemin');
-var pump = require('pump');
-var browserSync = require('browser-sync').create();
-var reload = browserSync.reload;
+let gulp = require('gulp');
+let less = require('gulp-less');
+let mincss = require('gulp-clean-css');
+let clean = require('gulp-clean');
+let nodemon = require('gulp-nodemon');
+let sequence = require('gulp-sequence');
+let imagemin = require('gulp-imagemin');
+let rename = require('gulp-rename');
+let babel = require('gulp-babel');
+let uglify = require('gulp-uglify');
+let browserify = require('gulp-browserify');
+let browserSync = require('browser-sync').create();
+let reload = browserSync.reload;
 
 // 清除构建文件夹中的内容
 gulp.task('clean', function () {
@@ -22,28 +23,42 @@ gulp.task('clean', function () {
         .pipe(clean());
 });
 
+// 使用Babel转换ES6语法和jsx
+gulp.task('babel', function(){
+    return gulp.src([
+        'src/javascript/**/*.jsx',
+        'src/javascript/**/*.js'
+    ]).pipe(babel({
+        presets:['env'],
+        plugins:['transform-react-jsx']
+    }))
+    .pipe(gulp.dest('public/javascript/'));
+});
+
+// 使用 Browserify 整合 React 的依赖并压缩
+gulp.task('react', ['babel'], function(){
+    return gulp.src(['public/javascript/*.js'])
+        .pipe(browserify({debug: true}))
+        // Make React available externally for dev tools
+        .on('prebundle', function(bundler) {bundler.require('react');})
+        .pipe(uglify({mangle: false}))
+        .pipe(gulp.dest('public/javascript/'))
+        .pipe(reload({stream: true}));
+});
+
+// 简单地移动页面文件
+gulp.task('views', function(){
+    return gulp.src('src/views/**/*.pug')
+        .pipe(gulp.dest('views/'))
+        .pipe(reload({stream: true}))
+});
+
 // 编译LESS并压缩CSS
 gulp.task('mincss', function () {
     return gulp.src('src/less/**/*.less')
         .pipe(less())
         .pipe(mincss())
         .pipe(gulp.dest('public/stylesheets/'))
-        .pipe(reload({stream: true}));
-});
-
-// 对Jade文件重命名
-gulp.task('pug',function () {
-    return gulp.src('src/views/**/*.jade')
-        .pipe(rename({extname: '.pug'}))
-        .pipe(gulp.dest('views/'))
-        .pipe(reload({stream: true}));
-});
-
-// 压缩JS文件
-gulp.task('uglify', function(){
-    return gulp.src(['src/javascript/**/*.js','!src/javascript/lib/**/*.js'])
-        .pipe(uglify({mangle: false}))
-        .pipe(gulp.dest('public/javascript/'))
         .pipe(reload({stream: true}));
 });
 
@@ -54,27 +69,15 @@ gulp.task('imagemin', function(){
         .pipe(gulp.dest('public/images/'));
 });
 
-// 抽取Bower中安装的前端库
-gulp.task('lib', function(){
-    var src = 'src/javascript/lib/', dist = 'public/javascript/lib/';
-    gulp.src( src + 'jquery/dist/jquery.min.js').pipe(gulp.dest(dist + 'jquery/dist'));
-    gulp.src( src + 'requirejs/require.js').pipe(gulp.dest(dist + 'requirejs'));
-    gulp.src( src + 'moment/min/moment.min.js').pipe(gulp.dest(dist + 'moment/min'));
-    gulp.src([
-        src + 'bootstrap-daterangepicker/daterangepicker.js',
-        src + 'bootstrap-daterangepicker/daterangepicker.css'
-    ]).pipe(gulp.dest(dist + 'bootstrap-daterangepicker/'));
-});
-
 // 构建
-gulp.task('build', sequence(['clean'],['mincss', 'pug', 'lib', 'uglify','imagemin']));
+gulp.task('build', sequence(['clean'],['mincss','imagemin','views', 'react']));
 
 // 测试启动服务
 gulp.task('server', ['build'], function(){
 
-    gulp.watch(['src/views/**/*.jade'], ['pug']);
+    gulp.watch(['src/views/**/*.pug'], ['view']);
     gulp.watch(['src/less/**/*.less'], ['mincss']);
-    gulp.watch(['src/javascript/**/*.js'], ['uglify']);
+    gulp.watch(['src/javascript/**/*.js'], ['react']);
 
     nodemon({
         script: 'bin/www.js',

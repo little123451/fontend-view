@@ -5,11 +5,11 @@
  */
 
 
-var url = require('locutus/php/url');
-var array = require('locutus/php/array');
-var strings = require('locutus/php/strings');
+let url = require('locutus/php/url');
+let array = require('locutus/php/array');
+let strings = require('locutus/php/strings');
 
-var php = {
+let php = {
     "parse_url": url.parse_url,         //  http://php.net/manual/zh/function.parse-url.php
     "urlencode": url.urlencode,         //  http://php.net/manual/zh/function.urlencode.php
     "array_merge": array.array_merge,   //  http://php.net/manual/zh/function.array-merge.php

@@ -10,8 +10,8 @@
  * @returns {Array}
  */
 function distinct(array) {
-    var collection = {}, cleanedArray = [];
-    for (var i = 0; i < array.length; i++) {
+    let collection = {}, cleanedArray = [];
+    for (let i = 0; i < array.length; i++) {
         if (!collection[array[i]]) {
             collection[array[i]] = true;
             cleanedArray.push(array[i]);
@@ -20,21 +20,25 @@ function distinct(array) {
     return cleanedArray;
 }
 
+/**
+ * 深复制
+ *
+ * @param object
+ * @returns {*}
+ */
 function deepCopy(object) {
     if (typeof object === 'object') {
         if (Array.isArray(object)) {
-            var newArray = [];
-            for (var i = 0; i < object.length; i++) {
+            let newArray = [];
+            for (let i = 0; i < object.length; i++) {
                 newArray[i] = deepCopy(object[i]);
             }
-
             return newArray;
         } else {
-            var newObj = {};
-            for (var key in object) {
+            let newObj = {};
+            for (let key in object) {
                 newObj[key] = deepCopy(object[key]);
             }
-
             return newObj;
         }
     } else {

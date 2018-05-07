@@ -4,10 +4,10 @@
  */
 
 
-var http = require('http');
-var php = require('./php.js');
-var log = require('./log.js').getLogger('POST_MAN');
-var Q = require('q');
+let http = require('http');
+let php = require('./php.js');
+let log = require('./log.js').getLogger('POST_MAN');
+let Q = require('q');
 
 /*
  * 根据初始化时传入的 url 中 query 参数进行初始化
@@ -15,13 +15,13 @@ var Q = require('q');
  * @param $url string  请求链接
  */
 function initQuery(self, url){
-    var meta = php.parse_url(url);
+    let meta = php.parse_url(url);
     if ( ! meta.hasOwnProperty('query') ) {
         self.query = {};
         return;
     }
-    var temp = {}, kv;
-    var arr = php.explode('&', meta['query']);
+    let temp = {}, kv;
+    let arr = php.explode('&', meta['query']);
     for ( key in arr) {
         kv = php.explode('=', arr[key], 2);
         if (kv.length == 2) temp[kv[0]] = kv[1];
@@ -31,7 +31,7 @@ function initQuery(self, url){
 
 /* 将 query 参数加载到 url 中 */
 function loadQuery(self){
-    var query = '', param;
+    let query = '', param;
     for ( key in self.query ) {
         param = key + '=' + php.urlencode(self.query[key]);
         query = query + param + '&';
@@ -44,7 +44,7 @@ function loadQuery(self){
 
 module.exports = function(url){
 
-    var self = {
+    let self = {
         url: '',
         retry : 0,
         contentType : 'default',
@@ -53,7 +53,7 @@ module.exports = function(url){
         headers : {}
     };
 
-    var postman = {
+    let postman = {
 
         /**
          * 发送 POST 请求
@@ -90,11 +90,11 @@ module.exports = function(url){
 
             loadQuery(self);
 
-            var arr = php.parse_url(self.url),path;
+            let arr = php.parse_url(self.url),path;
             if (arr.query != undefined) path = arr.path + '?' + arr.query;
                 else path = arr.path;
 
-            var opt = {
+            let opt = {
                 host : arr.host,
                 port : arr.port,
                 path : path,
@@ -103,12 +103,12 @@ module.exports = function(url){
                 method : method
             };
 
-            var deferred = Q.defer();
-            var req = http.request(opt, function (res) {
+            let deferred = Q.defer();
+            let req = http.request(opt, function (res) {
                 log.debug('STATUS:' + res.statusCode);
                 log.debug('HEADERS: ' + JSON.stringify(res.headers));
 
-                var str = '';
+                let str = '';
                 res.setEncoding('utf8');
                 res.on('data', function (data) {
                     str = str + data;
@@ -256,7 +256,7 @@ module.exports = function(url){
          * @return string   返回设置的 Header 的字符串
          */
         "ContentType" : function(type){
-            var header = '';
+            let header = '';
             switch(type){
                 case 'raw' :
                     header = 'text/plain; charset=UTF-8';

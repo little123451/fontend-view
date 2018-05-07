@@ -83,4 +83,5 @@ gulp server
 0. [Webpack模块化管理及打包工具](http://webpackdoc.com/)
 0. [Vue前端MVVC框架](http://cn.vuejs.org/)
 0. [React.js框架](http://reactjs.cn/react/docs/getting-started-zh-CN.html)
+0. [Browserify + Gulp + React](https://lincolnloop.com/blog/untangle-your-javascript-browserify/)
 0. [Ant Design](https://ant.design/)
