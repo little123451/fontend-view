@@ -2,11 +2,13 @@
 ---
 1.安装
 > **必须**
+>
 > 安装 node.js v8.0.0 或以上，以获取 node 端的 ES6 语法支持
 > 通过 `npm install -g gulp` 安装 `gulp` 进行项目构建
 > 通过 `npm install` 安装 `npm` 依赖
 > 
 > **可选**
+>
 > 通过 `npm install -g pm2` 安装 `pm2` 管理Node应用进程
 > 通过 `npm install npm@lastest -g` 将 `npm` 更新到最新版本
 
@@ -54,6 +56,7 @@ gulp server
 相关技术参考文档
 ---------------
 **基础**
+
 0. [NodeJS中文网](http://nodejs.cn/)
 1. [NPM官网](https://www.npmjs.com)
 2. [Jade语法参考文档](http://naltatis.github.io/jade-syntax-docs/)
@@ -61,16 +64,19 @@ gulp server
 4. [CommonJS和AMD规范](http://javascript.ruanyifeng.com/nodejs/module.html)
 
 **常用库**
+
 0. [Bootstrap参考文档](http://v3.bootcss.com/)
 1. [React.js框架](http://reactjs.cn/react/docs/getting-started-zh-CN.html)
 2. [underscore.js工具类库](http://underscorejs.org/)
 
 **常用工具**
+
 0. [pm2 : Node应用管理工具](https://www.npmjs.com/package/pm2)
 1. [Gulp前端构建工具](http://www.gulpjs.com.cn/)
 2. [Browsersync浏览器同步测试工具](http://www.browsersync.cn/)
 
 **扩展**
+
 0. [Express-Session参考文档](https://www.npmjs.com/package/express-session)
 1. [log4js参考文档](https://github.com/nomiddlename/log4js-node/wiki)
 2. [Markdown语法参考文档](http://wowubuntu.com/markdown)
