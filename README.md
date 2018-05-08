@@ -85,7 +85,6 @@ gulp server
 2. [Markdown语法参考文档](http://wowubuntu.com/markdown)
 3. [Markdown在线编写](https://maxiang.io/)
 4. [淘宝NPM镜像](https://npm.taobao.org/)
-5. [Webpack模块化管理及打包工具](http://webpackdoc.com/)
 6. [Vue前端MVVC框架](http://cn.vuejs.org/)
 7. [Browserify + Gulp + React](https://lincolnloop.com/blog/untangle-your-javascript-browserify/)
 8. [配置你的 Gulp + Browserify](https://www.npmjs.com/package/gulp-browserify)
@@ -104,12 +103,19 @@ gulp server
 > 
 > **根据项目需要，bower 用于管理前端样式库可能比较适合**
 
-0. [RequireJS文档](http://www.requirejs.cn/)
+1. [RequireJS文档](http://www.requirejs.cn/)
 > 初期通过 RequireJS 来实现JS模块化的功能
 >
 > 由于文档大部分为英文，再加上现在大部分框架或者工具已经将 require 方法做了实现
 >
 > 所以用 Gulp + Browserify 代替了这一模块
 
-0. [ECharts文档](http://echarts.baidu.com/examples.html)
+2. [Webpack模块化管理及打包工具](http://webpackdoc.com/)
+> Webpack + React.js 是初期官方推荐的开发方法
+>
+> 由于Webpack 配置较为复杂，在静态文件的处理上没有 Gulp 方便，最后使用了两者组合的方案
+>
+> 后来了解到 Browserify 更为方便，便放弃了 Webpack
+
+3. [ECharts文档](http://echarts.baidu.com/examples.html)
 > ECharts是一个很棒的数据可视化JS库，该 repo 由实际项目转化而来，之前的项目中有使用过
