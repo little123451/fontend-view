@@ -4,12 +4,15 @@
 > **必须**
 >
 > 安装 node.js v8.0.0 或以上，以获取 node 端的 ES6 语法支持
+>
 > 通过 `npm install -g gulp` 安装 `gulp` 进行项目构建
+>
 > 通过 `npm install` 安装 `npm` 依赖
 > 
 > **可选**
 >
 > 通过 `npm install -g pm2` 安装 `pm2` 管理Node应用进程
+>
 > 通过 `npm install npm@lastest -g` 将 `npm` 更新到最新版本
 
 2.启动
