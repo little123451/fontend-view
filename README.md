@@ -95,14 +95,20 @@ gulp server
 ---------------
 0. [Bower前端包管理工具](https://bower.io/)
 > 在引入了 Browserify + Babel 后，可以直接通过如:  `import $ from 'jquery' ` 来引入前端包
+>
 > 于是前端包的管理也交给 npm，最终和 node 端用到的包一起记录到 `package.json` 中
+>
 > 这样的好处是包的引入相对 Bower 方便了一些
+>
 > 坏处是由于 Browserify 的处理，无法使用 公共CDN 加速一些前端包的加载
+> 
 > **根据项目需要，bower 用于管理前端样式库可能比较适合**
 
 0. [RequireJS文档](http://www.requirejs.cn/)
 > 初期通过 RequireJS 来实现JS模块化的功能
+>
 > 由于文档大部分为英文，再加上现在大部分框架或者工具已经将 require 方法做了实现
+>
 > 所以用 Gulp + Browserify 代替了这一模块
 
 0. [ECharts文档](http://echarts.baidu.com/examples.html)
