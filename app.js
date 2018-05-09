@@ -5,7 +5,11 @@ let favicon = require('serve-favicon');
 let cookieParser = require('cookie-parser');
 let session = require('express-session');
 let bodyParser = require('body-parser');
+let compression = require('compression');
 let app = express();
+
+// 压缩返回文件
+app.use(compression());
 
 // 路由
 let routes = {
