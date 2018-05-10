@@ -75,7 +75,7 @@ gulp.task('build', sequence(['clean'],['mincss','imagemin','views', 'react']));
 // 测试启动服务
 gulp.task('server', ['build'], function(){
 
-    gulp.watch(['src/views/**/*.pug'], ['view']);
+    gulp.watch(['src/views/**/*.pug'], ['views']);
     gulp.watch(['src/less/**/*.less'], ['mincss']);
     gulp.watch(['src/javascript/**/*.js'], ['react']);
 
