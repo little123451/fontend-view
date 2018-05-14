@@ -3,9 +3,11 @@
  */
 
 const _ = require('underscore');
+const NodeCache = require('node-cache');
 const url = require('locutus/php/url');
 const array = require('locutus/php/array');
 const strings = require('locutus/php/strings');
+const cache = new NodeCache({stdTTL:7200});
 
 module.exports = {
 
@@ -15,7 +17,11 @@ module.exports = {
     "explode": strings.explode,         //  http://php.net/manual/zh/function.explode.php
     "trim": strings.trim,               //  http://php.net/manual/zh/function.trim.php
 
-    "distinct": _.uniq,
-    "clone": _.clone
+    // https://www.npmjs.com/package/node-cache
+    "setCache": cache.set,
+    "getCache": cache.get,
 
+    // http://underscorejs.org
+    "distinct": _.uniq,
+    "clone": _.clone,
 }

@@ -83,10 +83,11 @@ gulp server
 **扩展**
 
 0. [Express-Session参考文档](https://www.npmjs.com/package/express-session)
-1. [log4js参考文档](https://github.com/nomiddlename/log4js-node/wiki)
-2. [Markdown语法参考文档](http://wowubuntu.com/markdown)
-3. [Markdown在线编写](https://maxiang.io/)
-4. [淘宝NPM镜像](https://npm.taobao.org/)
+1. [Node-cache简易Node缓存](https://www.npmjs.com/package/node-cache)
+2. [log4js参考文档](https://github.com/nomiddlename/log4js-node/wiki)
+3. [Markdown语法参考文档](http://wowubuntu.com/markdown)
+4. [Markdown在线编写](https://maxiang.io/)
+5. [淘宝NPM镜像](https://npm.taobao.org/)
 6. [Vue前端MVVC框架](http://cn.vuejs.org/)
 7. [Browserify + Gulp + React](https://lincolnloop.com/blog/untangle-your-javascript-browserify/)
 8. [使用watchify加速Browserify编译](https://www.gulpjs.com.cn/docs/recipes/fast-browserify-builds-with-watchify/)
