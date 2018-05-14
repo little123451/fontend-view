@@ -1,11 +1,11 @@
 /**
- * Node端链接PHP端interface的API接口封装
+ * Node端链接后端的API接口封装
  */
 
 
-let postman = require('./postman.js');
+const Request = require('./request.js');
 
-let config = {
+const config = {
     'host' : 'api.lierenio.com',
     'port' : 80,
     'base_url' : '/interface/index.php/',
@@ -14,7 +14,7 @@ let config = {
     }
 };
 
-let map = config.api_map;
+const map = config.api_map;
 
 /**
  * 根据apiKey从api_map中选择接口构造链接
@@ -22,23 +22,20 @@ let map = config.api_map;
  * @param api
  * @returns {string}
  */
-function createUrl(api){
+createUrl = (api) => {
     return'http://' + config.host + ":" + config.port + config.base_url + api;
-}
+};
 
-let api = {
+module.exports = {
 
     /**
      * 测试接口
      *
      * @returns {*}
      */
-    "test" : function(){
+    test() {
         let url = createUrl(map.test);
-        let req = new postman(url);
-        return req.GET()
+        return Request.get(url, {})
     }
 
 };
-
-module.exports = api;

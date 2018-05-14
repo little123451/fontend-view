@@ -1,9 +1,9 @@
-let express = require('express');
-let router = express.Router();
-let log = require('../utils/log').getLogger('INDEX');
+const express = require('express');
+const router = express.Router();
+const log = require('../utils/log').getLogger('INDEX');
 
-/* 门户首页 */
-router.get('/index', function (req, res, next) {
+/* 首页 */
+router.get('/index', (req, res, next) => {
     let ret = {
         query: req.query,
         body: req.body

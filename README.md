@@ -64,13 +64,15 @@ gulp server
 1. [NPM官网](https://www.npmjs.com)
 2. [Jade语法参考文档](http://naltatis.github.io/jade-syntax-docs/)
 3. [Less参考文档](http://lesscss.cn/)
-4. [CommonJS和AMD规范](http://javascript.ruanyifeng.com/nodejs/module.html)
+4. [使用下一代JS语法: ES6](https://www.cnblogs.com/Wayou/p/es6_new_features.html)
+5. [Express - Node.js框架](http://www.expressjs.com.cn/4x/api.html)
 
 **常用库**
 
 0. [Bootstrap参考文档](http://v3.bootcss.com/)
 1. [React.js框架](http://reactjs.cn/react/docs/getting-started-zh-CN.html)
 2. [underscore.js工具类库](http://underscorejs.org/)
+3. [Request.js - HTTP请求库](https://github.com/request/request#requestoptions-callback)
 
 **常用工具**
 
@@ -87,8 +89,11 @@ gulp server
 4. [淘宝NPM镜像](https://npm.taobao.org/)
 6. [Vue前端MVVC框架](http://cn.vuejs.org/)
 7. [Browserify + Gulp + React](https://lincolnloop.com/blog/untangle-your-javascript-browserify/)
+8. [使用watchify加速Browserify编译](https://www.gulpjs.com.cn/docs/recipes/fast-browserify-builds-with-watchify/)
 8. [配置你的 Gulp + Browserify](https://www.npmjs.com/package/gulp-browserify)
-9. [Ant Design](https://ant.design/)
+9. [CommonJS和AMD规范](http://javascript.ruanyifeng.com/nodejs/module.html)
+10. [使用Babel体验下一代JS语法](https://babeljs.cn/)
+11. [Ant Design](https://ant.design/)
 
 曾经使用过的工具或包
 ---------------
@@ -100,6 +105,8 @@ gulp server
 > 这样的好处是包的引入相对 Bower 方便了一些
 >
 > 坏处是由于 Browserify 的处理，无法使用 公共CDN 加速一些前端包的加载
+>
+> 在拆分前，公共模块也无法很好地利用浏览器端缓存
 > 
 > **根据项目需要，bower 用于管理前端样式库可能比较适合**
 

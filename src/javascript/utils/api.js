@@ -1,44 +1,57 @@
+/**
+ * 对接 Node 端 API 接口
+ */
+
 import $ from 'jquery';
 
-const api = {
-    'test': '/index'
-};
-
-let send = (url, method, data) => {
-    let deferred = $.Deferred();
-    let link = url;
-    let base_url = '/api';
-
-    let obj = {
-        url: base_url + link,
-        type: method,
-        data: data,
-        dataType: 'json',
-        success:(res) =>{ deferred.resolve(res)},
-        error: (res) =>{ deferred.reject(res)}
-    };
-
-    if (method == 'POST') {
-        $.extend(obj,{
-            contentType:'application/json',
-            processData: false,
-            data: JSON.stringify(data)
-        })
+// API接口配置信息
+const config = {
+    'base_url': '/api',
+    'api': {
+        'test': '/index'
     }
-
-    $.ajax(obj);
-
-    return deferred.promise();
 };
 
-module.exports = {
+/**
+ * 发送请求到 node 端
+ *
+ * @param url
+ * @param method
+ * @param data
+ * @returns {Promise}
+ */
+const send = (url, method, data) => {
+    method = method.toUpperCase();
+    return new Promise((resolve, reject) => {
+        let obj = {
+            url: config.base_url + url,
+            type: method,
+            data: data,
+            dataType: 'json',
+            success:(res) =>{ resolve(res)},
+            error: (res) =>{ reject(res)}
+        };
+
+        if (method == 'POST') {
+            $.extend(obj,{
+                contentType:'application/json',
+                processData: false,
+                data: JSON.stringify(data)
+            })
+        }
+
+        $.ajax(obj);
+    });
+};
+
+export default {
 
     test(){
-        let url = api.test;
+        let url = config.api.test;
         let method = 'GET';
         let data = {
             hello: 'world'
-        }
+        };
         return send(url, method, data);
     }
 

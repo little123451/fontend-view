@@ -1,14 +1,14 @@
 /**
  * 日志记录类
  * 使用方法：
- *      var log = require('../utils/log').getLogger('日志记录器名称');
+ *      const log = require('../utils/log').getLogger('日志记录器名称');
  *
  * https://github.com/nomiddlename/log4js-node/wiki
  */
 
 
-var log4js = require('log4js');
-var __load = {};
+const log4js = require('log4js');
+let __load = {};
 
 log4js.configure({
     "appenders": [
@@ -23,12 +23,12 @@ log4js.configure({
     ]
 });
 
-exports.getLogger = function(name){
+exports.getLogger = (name) => {
 
     //如果已经加载过,则直接返回
     if (__load.hasOwnProperty(name)) return __load[name];
 
-    var dateFileLog = log4js.getLogger(name);
+    let dateFileLog = log4js.getLogger(name);
     dateFileLog.setLevel(log4js.levels.INFO);
 
     //在内存中缓存logger
