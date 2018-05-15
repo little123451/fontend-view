@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const log = require('../utils/log').getLogger('INDEX');
+const WeChat = require('./wechat');
+const log = require('../utils/log').getLogger('API');
 
 /* 首页 */
 router.get('/index', (req, res, next) => {
@@ -10,5 +11,8 @@ router.get('/index', (req, res, next) => {
     };
     res.send(JSON.stringify(ret));
 });
+
+/* 微信模块 */
+router.use('/wx', WeChat);
 
 module.exports = router;

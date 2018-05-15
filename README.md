@@ -15,7 +15,7 @@
 >
 > 通过 `npm install npm@lastest -g` 将 `npm` 更新到最新版本
 
-2.启动
+2.启动测试服务
 > 在命令行状态下进入到项目根目录
 ``` shell
 gulp server
@@ -126,4 +126,4 @@ gulp server
 > 后来了解到 Browserify 更为方便，便放弃了 Webpack
 
 3. [ECharts文档](http://echarts.baidu.com/examples.html)
-> ECharts是一个很棒的数据可视化JS库，该 repo 由实际项目转化而来，之前的项目中有使用过
+> ECharts是数据可视化JS库

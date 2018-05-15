@@ -15,5 +15,25 @@ export default {
     "urlencode": urlencode,             //  http://php.net/manual/zh/function.urlencode.php
     "array_merge": array_merge,         //  http://php.net/manual/zh/function.array-merge.php
     "explode": explode,                 //  http://php.net/manual/zh/function.explode.php
-    "trim": trim                        //  http://php.net/manual/zh/function.trim.php
+    "trim": trim,                       //  http://php.net/manual/zh/function.trim.php
+
+    /**
+     * 获取URL参数
+     *
+     * @param name
+     * @param _default
+     * @returns {*}
+     */
+    getUrlParam(name = '', _default = null){
+        let query = trim(window.location.search, '?').split('&');
+        let reg = new RegExp('(.*)=(.*)'), match, data = {};
+        query.map((item) => {
+            match = reg.exec(item);
+            if (match) data[match[1]] = match[2];
+        });
+        if (name == '') return data;
+        else if (data[name]) return data[name];
+        else return _default;
+    }
+
 }
