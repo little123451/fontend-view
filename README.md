@@ -38,20 +38,19 @@ gulp server
 │   ├── javascript
 │   └── stylesheets
 ├── README.md
-├── routes               # Node端逻辑
-│   ├── api.js           # API-Router
-│   └── index.js         # 页面Router
+├── routes               # Node端路由逻辑
+│   ├── api.js          # API路由
+│   ├── index.js        # 页面路由
 ├── src                  # 构建前的静态文件
 │   ├── images
 │   ├── javascript
 │   ├── less
 │   └── views
 ├── utils                # Node端工具类或函数
-│   ├── api.js          # Node端链接后端的API接口封装
+│   ├── api.js          # 简易API接口封装
 │   ├── log.js          # 日志记录类
-│   ├── php.js          # 在Node中使用PHP函数的封装
-│   └── postman.js      # Node端对于发送请求方法的封装
-│   └── utils.js        # Node端工具类函数
+│   ├── request.js      # HTTP请求类
+│   └── utils.js        # 工具函数
 └── views                # 存放构建后的Pug(Jade)文件
 
 ```
