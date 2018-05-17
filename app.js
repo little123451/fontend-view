@@ -14,10 +14,13 @@ app.use(compression());
 // 路由
 let routes = {
   "index" : require('./routes/index'),
-  "api" : require('./routes/api')
+  "api" : require('./routes/api'),
+  "wechat": require('./routes/wechat')
 };
+
 app.use('/index', routes.index);
 app.use('/api', routes.api);
+app.use('/wechat', routes.wechat);
 
 // 设置页面解析引擎
 app.set('views', path.join(__dirname, 'views'));

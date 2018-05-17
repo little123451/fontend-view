@@ -31,7 +31,9 @@ class Index extends React.Component {
                 localId: '',
                 serverId: ''
             },
-            user: {}
+            codes: [],
+            user: {},
+            cardExt: {}
         }
     }
 
@@ -79,6 +81,11 @@ class Index extends React.Component {
         API.wechat.userinfo().then((res)=>{
             console.log(res);
             self.setState({user: res});
+        });
+
+        API.wechat.cardSignature('pytl205xYi_sTjmJLMAjThi-mReg').then((res) =>{
+            console.log(res);
+            self.setState({cardExt: res});
         });
 
         API.wechat.signature(list);
@@ -610,6 +617,81 @@ class Index extends React.Component {
         });
     }
 
+    /* 添加卡券 */
+    addCard(){
+        let cardExt = this.state.cardExt;
+        cardExt.nonce_str = cardExt.nonceStr;
+        wx.addCard({
+            cardList: [
+                {
+                    cardId: 'pytl205xYi_sTjmJLMAjThi-mReg',
+                    cardExt: JSON.stringify(cardExt)
+                },
+                {
+                    cardId: 'pytl205xYi_sTjmJLMAjThi-mReg',
+                    cardExt: JSON.stringify(cardExt)
+                }
+            ],// 需要添加的卡券列表
+            success: function (res) {
+                console.log(res);
+                // 添加的卡券列表信息
+                alert('已添加卡券：' + JSON.stringify(res.cardList));
+            },
+            cancel: function (res) {
+                alert(JSON.stringify(res))
+            },
+            fail: function(err){
+                alert(JSON.stringify(res));
+            }
+        });
+    }
+
+    /* 选择卡券 */
+    chooseCard(){
+        let ext = this.state.cardExt;
+        wx.chooseCard({
+            //shopId: '', // 门店Id
+            //cardType: 'GROUPON', // 卡券类型
+            cardId: 'pytl205xYi_sTjmJLMAjThi-mReg', // 卡券Id
+            timestamp: ext.timestamp, // 卡券签名时间戳
+            nonceStr: ext.nonceStr, // 卡券签名随机串
+            signType: 'SHA1', // 签名方式，默认'SHA1'
+            cardSign: ext.signature, // 卡券签名
+            success: function (res) {
+                res.cardList = JSON.parse(res.cardList);// 用户选中的卡券列表信息
+                encrypt_code = res.cardList[0]['encrypt_code'];
+                alert('已选择卡券：' + JSON.stringify(res.cardList));
+            },
+            cancel: function (res) {
+                alert(JSON.stringify(res))
+            },
+            fail: function(err){
+                alert(JSON.stringify(err))
+            }
+        });
+    }
+
+    /* 查看卡券 */
+    openCard(){
+        let cardList = [], codes = this.state.codes;
+        if (codes.length < 1) {
+            alert('请先使用 chooseCard 接口选择卡券。');
+            return false;
+        }
+        for (let i = 0; i < codes.length; i++) {
+            cardList.push({
+                cardId: 'pytl205xYi_sTjmJLMAjThi-mReg',
+                code: codes[i]
+            });
+        }
+        wx.openCard({
+            cardList: cardList,
+            cancel: function (res) {
+                alert(JSON.stringify(res))
+            }
+        });
+    }
+
     renderCell(summary, btn, event){
         return (
             <div className="cell">
@@ -705,6 +787,12 @@ class Index extends React.Component {
         // 微信小店接口
         cells.push(this.renderCell('跳转微信商品页接口','openProductSpecificView', this.openProductSpecificView))
         frames.push(this.renderFrame('微信小店接口', cells)); cells = [];
+
+        // 微信卡券
+        cells.push(this.renderCell('批量添加卡券接口','addCard', this.addCard))
+        cells.push(this.renderCell('拉取适用卡券列表并获取用户选择信息','chooseCard', this.chooseCard))
+        cells.push(this.renderCell('查看微信卡包中的卡券接口','openCard', this.openCard))
+        frames.push(this.renderFrame('微信卡券', cells)); cells = [];
 
         return(
             <div className="p-wechat">

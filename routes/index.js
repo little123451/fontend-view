@@ -10,9 +10,4 @@ router.get('/', (req, res, next) => {
     res.render('index',{});
 });
 
-router.get('/wechat', (req, res, next) => {
-    log.info("首页被访问 - 来自log4js的DEBUG信息");
-    res.render('wechat',{});
-});
-
 module.exports = router;

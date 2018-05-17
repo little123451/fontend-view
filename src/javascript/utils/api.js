@@ -7,13 +7,15 @@ import Utils from './utils';
 
 // API接口配置信息
 const config = {
-    'base_url': '/api',
+    'base_url': '/',
     'api': {
-        'test': '/index',
+        'test': 'api/index',
         'wechat': {
-            'signature': '/wx/signature',
-            'webToken': '/wx/webToken',
-            'userInfo': '/wx/userInfo',
+            'signature': 'wechat/signature',
+            'cardSignature': 'wechat/cardSignature',
+            'webToken': 'wechat/webToken',
+            'userInfo': 'wechat/userInfo',
+            'decryptCode': 'wechat/decryptCode',
         }
     }
 };
@@ -82,13 +84,25 @@ export default {
             return send(url, method, data).then((res)=>{
                 wx.config({
                     debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-                    appId: res.appid, // 必填，公众号的唯一标识
+                    appId: res.appId, // 必填，公众号的唯一标识
                     timestamp: res.timestamp, // 必填，生成签名的时间戳
-                    nonceStr: res.noncestr, // 必填，生成签名的随机串
+                    nonceStr: res.nonceStr, // 必填，生成签名的随机串
                     signature: res.signature,// 必填，签名
                     jsApiList: apiList // 必填，需要使用的JS接口列表
                 });
             });
+        },
+
+        /**
+         * 获取卡券配置信息
+         *
+         * @returns {Promise}
+         */
+        cardSignature(cardID = '', code = '', openID = ''){
+            let url = config.api.wechat.cardSignature;
+            let method = 'GET';
+            let data = {cardID: cardID, code: code, openID: openID};
+            return send(url, method, data)
         },
 
         /**
@@ -153,6 +167,13 @@ export default {
                 };
                 return send(url, method, data);
             })
+        },
+
+        decryptCode(encryptCode){
+            let url = config.api.wechat.decryptCode;
+            let method = 'POST';
+            let data = {encrypt: encryptCode};
+            return send(url, method, data);
         },
 
     }

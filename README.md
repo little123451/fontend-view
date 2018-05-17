@@ -96,6 +96,12 @@ gulp server
 10. [使用Babel体验下一代JS语法](https://babeljs.cn/)
 11. [Ant Design](https://ant.design/)
 
+**第三方**
+
+0. [微信公共平台消息接口服务中间件](https://github.com/node-webot/wechat)
+1. [微信公共平台Node库API](http://doxmate.cool/node-webot/co-wechat-api/api.html)
+1. [微信公众平台](https://mp.weixin.qq.com/wiki)
+
 曾经使用过的工具或包
 ---------------
 0. [Bower前端包管理工具](https://bower.io/)
@@ -109,7 +115,7 @@ gulp server
 >
 > 在拆分前，公共模块也无法很好地利用浏览器端缓存
 > 
-> **根据项目需要，bower 用于管理前端样式库可能比较适合**
+> **根据项目需要，bower 可用于管理前端样式库**
 
 1. [RequireJS文档](http://www.requirejs.cn/)
 > 初期通过 RequireJS 来实现JS模块化的功能
