@@ -79,12 +79,12 @@ class Index extends React.Component {
         ];
 
         API.wechat.userinfo().then((res)=>{
-            console.log(res);
+            console.log('js_ext', res);
             self.setState({user: res});
         });
 
         API.wechat.cardSignature('pytl205xYi_sTjmJLMAjThi-mReg').then((res) =>{
-            console.log(res);
+            console.log('card_ext', res);
             self.setState({cardExt: res});
         });
 

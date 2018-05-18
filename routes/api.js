@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const log = require('../utils/log').getLogger('API');
 
-/* 首页 */
+/* example */
 router.get('/index', (req, res, next) => {
     let ret = {
         query: req.query,

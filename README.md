@@ -21,6 +21,14 @@
 gulp server
 ```
 
+3.样例路由
+```shell
+/index              默认首页
+/wechat/index       微信公众号网页开发样例
+/api/index          Node端接口样例
+/index/bootstrap    React-Bootstrap页面样例
+```
+
 文件目录
 ----
 ```powershell
@@ -94,6 +102,7 @@ gulp server
 9. [CommonJS和AMD规范](http://javascript.ruanyifeng.com/nodejs/module.html)
 10. [使用Babel体验下一代JS语法](https://babeljs.cn/)
 11. [Ant Design](https://ant.design/)
+12. [React-Bootstrap](https://react-bootstrap.github.io/)
 
 **第三方**
 
