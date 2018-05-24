@@ -1,3 +1,6 @@
+Frontend - 用于构建和编写Web前端页面
+=========================
+
 起步
 ---
 1.安装
@@ -63,7 +66,7 @@ gulp server
 
 ```
 
-相关技术参考文档
+参考文档
 ---------------
 **基础**
 
@@ -78,7 +81,7 @@ gulp server
 
 0. [Bootstrap参考文档](http://v3.bootcss.com/)
 1. [React.js框架](http://reactjs.cn/react/docs/getting-started-zh-CN.html)
-2. [underscore.js工具类库](http://underscorejs.org/)
+2. [Lodash工具类库](https://www.lodashjs.com/)
 3. [Request.js - HTTP请求库](https://github.com/request/request#requestoptions-callback)
 
 **常用工具**
@@ -141,3 +144,10 @@ gulp server
 
 3. [ECharts文档](http://echarts.baidu.com/examples.html)
 > ECharts是数据可视化JS库
+
+4. [underscore.js工具类库](http://underscorejs.org/)
+> underscore是一个轻量级的js工具类库，提供了很多便捷的小方法
+>
+> 后使用 lodash.js 替换，后者是一个从 underscore fork 出来的项目
+>
+> 它方法更多，兼容性更好，从 underscore 转移非常方便。

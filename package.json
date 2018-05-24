@@ -18,6 +18,7 @@
     "gulp-htmlmin": "^4.0.0",
     "jquery": "^3.3.1",
     "locutus": "^2.0.9",
+    "lodash": "^4.17.10",
     "log4js": "^0.6.36",
     "morgan": "~1.6.1",
     "node-cache": "^4.2.0",

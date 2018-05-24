@@ -2,7 +2,7 @@
  * 这里放一些常用的工具类函数
  */
 
-const _ = require('underscore');
+const _ = require('lodash');
 const NodeCache = require('node-cache');
 const url = require('locutus/php/url');
 const array = require('locutus/php/array');
@@ -24,7 +24,7 @@ module.exports = {
     "setCache": cache.set,
     "getCache": cache.get,
 
-    // http://underscorejs.org
+    // https://www.lodashjs.com/
     "distinct": _.uniq,
     "clone": _.clone,
 
