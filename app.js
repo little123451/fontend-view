@@ -8,19 +8,12 @@ let bodyParser = require('body-parser');
 let compression = require('compression');
 let app = express();
 
+// Content-Type 的处理
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+
 // 压缩返回文件
 app.use(compression());
-
-// 路由
-let routes = {
-  "index" : require('./routes/index'),
-  "api" : require('./routes/api'),
-  "wechat": require('./routes/wechat')
-};
-
-app.use('/index', routes.index);
-app.use('/api', routes.api);
-app.use('/wechat', routes.wechat);
 
 // 设置页面解析引擎
 app.set('views', path.join(__dirname, 'views'));
@@ -35,10 +28,6 @@ app.use(function (req, res, next) {
 // 日志记录
 app.use(logger('dev'));
 
-// Content-Type 的处理
-app.use(bodyParser.json()); // for parsing application/json
-app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
-
 // Cookies 的处理
 app.use(cookieParser());
 app.use(session({
@@ -51,6 +40,17 @@ app.use(session({
 // 静态文件处理
 app.use(express.static(path.join(__dirname, 'public')));
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
+// 路由
+let routes = {
+    "index" : require('./routes/index'),
+    "api" : require('./routes/api'),
+    "wechat": require('./routes/wechat')
+};
+
+app.use('/index', routes.index);
+app.use('/api', routes.api);
+app.use('/wechat', routes.wechat);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
