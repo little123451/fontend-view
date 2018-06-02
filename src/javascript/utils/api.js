@@ -118,7 +118,7 @@ export default {
 
             // 缓存没有 token 则获取 code 请求 webToken接口
             let self = this, code = Utils.getUrlParam('code');
-            if (!code) self.redirect();
+            if (!code) return self.redirect();
 
             let url = config.api.wechat.webToken;
             let method = 'GET';
