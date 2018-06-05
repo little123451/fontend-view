@@ -1,4 +1,4 @@
-Frontend - 用于构建和编写Web前端页面
+Frontend - 学习、构建和编写Web前端页面
 =========================
 
 起步
@@ -112,6 +112,9 @@ gulp server
 0. [微信公共平台消息接口服务中间件](https://github.com/node-webot/wechat)
 1. [微信公共平台Node库API](http://doxmate.cool/node-webot/co-wechat-api/api.html)
 1. [微信公众平台](https://mp.weixin.qq.com/wiki)
+
+**Funny**
+0. [Yes or No](https://yesno.wtf/api)
 
 曾经使用过的工具或包
 ---------------

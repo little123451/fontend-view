@@ -24,10 +24,9 @@ gulp.task('clean', function () {
 });
 
 // 使用Babel转换ES6语法和jsx
-gulp.task('babel', function(){
+gulp.task('babel-react', function(){
     return gulp.src([
         'src/javascript/**/*.jsx',
-        'src/javascript/**/*.js'
     ]).pipe(babel({
         presets:['env'],
         plugins:['transform-react-jsx']
@@ -35,12 +34,30 @@ gulp.task('babel', function(){
     .pipe(gulp.dest('public/javascript/'));
 });
 
+gulp.task('babel-vue', function(){
+    return gulp.src([
+        'src/javascript/**/*.js',
+    ]).pipe(babel({
+        presets: ["env"],
+        plugins: ["transform-vue-jsx"]
+    }))
+    .pipe(gulp.dest('public/javascript/'));
+});
+
 // 使用 Browserify 整合 React 的依赖并压缩
-gulp.task('react', ['babel'], function(){
-    return gulp.src(['public/javascript/*.js'])
+gulp.task('react', ['babel-react'], function(){
+    return gulp.src(['public/javascript/*.jsx'])
         .pipe(browserify({debug: true}))
         // Make React available externally for dev tools
         .on('prebundle', function(bundler) {bundler.require('react');})
+        .pipe(uglify({mangle: false}))
+        .pipe(gulp.dest('public/javascript/'))
+        .pipe(reload({stream: true}));
+});
+
+gulp.task('vue', ['babel-vue'], function(){
+    return gulp.src(['public/javascript/*.js'])
+        .pipe(browserify({debug: true}))
         .pipe(uglify({mangle: false}))
         .pipe(gulp.dest('public/javascript/'))
         .pipe(reload({stream: true}));
@@ -70,14 +87,15 @@ gulp.task('imagemin', function(){
 });
 
 // 构建
-gulp.task('build', sequence(['clean'],['mincss','imagemin','views', 'react']));
+gulp.task('build', sequence(['clean'],['mincss','imagemin','views', 'vue', 'react']));
 
 // 测试启动服务
 gulp.task('server', ['build'], function(){
 
     gulp.watch(['src/views/**/*.pug'], ['views']);
     gulp.watch(['src/less/**/*.less'], ['mincss']);
-    gulp.watch(['src/javascript/**/*.js'], ['react']);
+    gulp.watch(['src/javascript/**/*.vue'], ['vue']);
+    gulp.watch(['src/javascript/**/*.jsx'], ['react']);
 
     nodemon({
         script: 'bin/www.js',

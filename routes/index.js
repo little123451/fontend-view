@@ -14,4 +14,9 @@ router.get('/bootstrap', (req, res, next) => {
     res.render('bootstrap',{});
 });
 
+/* vue 样例 */
+router.get('/vue', (req, res, next) => {
+    res.render('vue',{});
+});
+
 module.exports = router;
