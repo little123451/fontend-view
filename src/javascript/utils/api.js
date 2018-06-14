@@ -140,7 +140,7 @@ export default {
             let url = "https://open.weixin.qq.com/connect/oauth2/authorize";
             let data = {
                 'appid': this.appid,
-                'redirect_uri': encodeURI(window.location.href),
+                'redirect_uri': Utils.urlencode(window.location.href),
                 'response_type': 'code',
                 'scope': 'snsapi_userinfo',
                 'connect_redirect': '1#wechat_redirect'
