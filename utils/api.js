@@ -23,7 +23,8 @@ const map = config.api_map;
  * @returns {string}
  */
 createUrl = (api) => {
-    return'http://' + config.host + ":" + config.port + config.base_url + api;
+    const port = config.port === 80 || !isNumeric(config.port) ? '' : ':' + config.port
+    return'http://' + config.host + port + config.base_url + api;
 };
 
 module.exports = {

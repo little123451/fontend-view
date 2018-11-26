@@ -4,22 +4,33 @@
  * http://locutus.io/php/
  */
 
-import parse_url from 'locutus/php/url/parse_url';
-import urlencode from 'locutus/php/url/urlencode';
+// http://locutus.io/php/
+import date from 'locutus/php/datetime/date'
+import trim from 'locutus/php/strings/trim'
+import parseUrl from 'locutus/php/url/parse_url'
+import parseStr from 'locutus/php/strings/parse_str'
+import http_build_query from 'locutus/php/url/http_build_query'
+import urlencode from 'locutus/php/url/urlencode'
+import urldecode from 'locutus/php/url/urldecode'
+import uniqid from 'locutus/php/misc/uniqid'
 import array_merge from 'locutus/php/array/array_merge';
 import explode from 'locutus/php/strings/explode';
-import trim from 'locutus/php/strings/trim';
 
-const userAgent = navigator.userAgent;
+const userAgent = window.navigator.userAgent;
 const localStorage = window.localStorage;
 const localStoragePrefix = 'application.frontend.';
 
 export default {
-    "parse_url": parse_url,             //  http://php.net/manual/zh/function.parse-url.php
-    "urlencode": urlencode,             //  http://php.net/manual/zh/function.urlencode.php
-    "array_merge": array_merge,         //  http://php.net/manual/zh/function.array-merge.php
-    "explode": explode,                 //  http://php.net/manual/zh/function.explode.php
-    "trim": trim,                       //  http://php.net/manual/zh/function.trim.php
+    date: date, // http://locutus.io/php/datetime/date/index.html
+    trim: trim, // http://locutus.io/php/strings/trim/index.html
+    parse_url: parseUrl, // http://locutus.io/php/url/parse_url/index.html
+    parse_str: parseStr, // http://locutus.io/php/strings/parse_str/index.html
+    http_build_query: http_build_query, // http://locutus.io/php/url/http_build_query/index.html
+    urlencode: urlencode, // http://locutus.io/php/url/urldecode/index.html
+    urldecode: urldecode, // http://locutus.io/php/url/urlencode/index.html
+    array_merge: array_merge,// http://php.net/manual/zh/function.array-merge.php
+    uniqid: uniqid, // http://locutus.io/php/misc/uniqid/index.html
+    explode: explode, // http://php.net/manual/zh/function.explode.php
 
     /**
      * 成功log
@@ -157,7 +168,7 @@ export default {
         isAndroid: userAgent.indexOf('Android') > -1,
         isIPhone: userAgent.indexOf('iPhone') > -1, // 是否为iPhone
         isIPad: userAgent.indexOf('iPad') > -1, // 是否为iPad
-        isIOS: this.isIPhone || this.isIPad, // 是否为iOS
+        isIOS: userAgent.indexOf('iPhone') > -1 || userAgent.indexOf('iPad') > -1, // 是否为iOS
     },
 
 }

@@ -1,23 +1,24 @@
 const express = require('express');
 const router = express.Router();
+const Utils = require('../utils/utils');
 const log = require('../utils/log').getLogger('API');
 
-/* example */
+/* GET example */
 router.get('/index', (req, res, next) => {
-    let ret = {
+    let ret = Utils.buildResp({
         query: req.query,
         body: req.body
-    };
-    res.send(JSON.stringify(ret));
+    });
+    res.send(ret);
 });
 
-/* example */
+/* POST example */
 router.post('/index', (req, res, next) => {
-    let ret = {
+    let ret = Utils.buildResp({
         query: req.query,
         body: req.body
-    };
-    res.send(JSON.stringify(ret));
+    });
+    res.send(ret);
 });
 
 module.exports = router;

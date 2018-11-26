@@ -2,70 +2,89 @@
  * 对接 Node 端 API 接口
  */
 
-import $ from 'jquery';
+import axios from 'axios';
 import Utils from './utils';
+import Render from './render';
+import Config from './config';
+import JSONBig from 'json-bigint';
 
 // API接口配置信息
-const config = {
-    'base_url': '/',
-    'api': {
-        'test': 'api/index',
-        'wechat': {
-            'signature': 'wechat/signature',
-            'cardSignature': 'wechat/cardSignature',
-            'webToken': 'wechat/webToken',
-            'userInfo': 'wechat/userInfo',
-            'decryptCode': 'wechat/decryptCode',
-        }
+const config = Config.api;
+const apiMap = {
+    'test': 'api/index',
+    'wechat': {
+        'signature': 'wechat/signature',
+        'cardSignature': 'wechat/cardSignature',
+        'webToken': 'wechat/webToken',
+        'userInfo': 'wechat/userInfo',
+        'decryptCode': 'wechat/decryptCode',
     }
 };
 
 /**
- * 发送请求到 node 端
- *
- * @param url
- * @param method
- * @param data
- * @returns {Promise}
+ * axios 请求实例
+ * @type {AxiosInstance}
  */
-const send = (url, method, data) => {
-    method = method.toUpperCase();
-    return new Promise((resolve, reject) => {
-        let obj = {
-            url: config.base_url + url,
-            type: method,
-            data: data,
-            dataType: 'json',
-            success:(res) =>{
-                if (res.success) resolve(res.data);
-                    else reject(res.message);
-            },
-            error: (res) =>{
-                reject(res)
-            }
-        };
+let axiosInstance = axios.create({
+    timeout: config.timeout,
+    withCredentials: true,
+    headers: {'Content-Type': 'application/json'},
+    transformResponse: [
+        (data) => { return JSONBig({'storeAsString': true}).parse(data) }
+    ]
+});
 
-        if (method == 'POST') {
-            $.extend(obj,{
-                contentType:'application/json',
-                processData: false,
-                data: JSON.stringify(data)
-            })
+/**
+ * 构造请求URL
+ * @param api
+ * @returns {string}
+ */
+const createUrl = (api) => {
+    const port = !config.port || Number(config.port) === 80 ? '' : ':' + config.port;
+    return config.protal + '://' + config.host + port + config.basePath + api
+};
+
+/**
+ * 发送请求主方法
+ * 请求预处理和返回结果预处理
+ * @param obj
+ * @returns {Promise<T>}
+ */
+const request = (obj) => {
+    const map = obj.url;
+    const render = obj.render ? obj.render : Render._default;
+    obj.url = createUrl(obj.url);
+    delete obj.render;
+    return axiosInstance.request(obj).catch(err => {
+        Utils.logError('请求失败', err, obj);
+        return Promise.reject(err)
+    }).then(res => {
+        const method = obj.method;
+        if (res.data.success) {
+            const ret = render(res.data.data);
+            Utils.logSuccess(method, map, ret);
+            return Promise.resolve(ret);
+        } else {
+            Utils.logError(method, map, res.data.message);
+            return Promise.reject(res.data.message)
         }
-
-        $.ajax(obj);
-    });
+    }).catch(err => {
+        return Promise.reject(err)
+    })
 };
 
 export default {
 
     test(){
-        let url = config.api.test;
-        let method = 'GET';
-        let data = {
-            hello: 'world'
-        };
-        return send(url, method, data);
+        return request({
+            method: 'GET',
+            url: apiMap.test,
+            render: Render._default,
+            params: {
+                hello: 'world'
+            },
+            data: {}
+        });
     },
 
     wechat: {
@@ -78,10 +97,15 @@ export default {
          * @returns {Promise}
          */
         signature(apiList){
-            let url = config.api.wechat.signature;
-            let method = 'GET';
-            let data = { url: window.location.href };
-            return send(url, method, data).then((res)=>{
+            return request({
+                method: 'GET',
+                url: apiMap.wechat.signature,
+                render: Render._default,
+                params: {
+                    url: window.location.href
+                },
+                data: {}
+            }).then(res => {
                 wx.config({
                     debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
                     appId: res.appId, // 必填，公众号的唯一标识
@@ -99,10 +123,13 @@ export default {
          * @returns {Promise}
          */
         cardSignature(cardID = '', code = '', openID = ''){
-            let url = config.api.wechat.cardSignature;
-            let method = 'GET';
-            let data = {cardID: cardID, code: code, openID: openID};
-            return send(url, method, data)
+            return request({
+                method: 'GET',
+                url: apiMap.wechat.cardSignature,
+                render: Render._default,
+                params: { cardID, code, openID },
+                data: {}
+            })
         },
 
         /**
@@ -120,14 +147,16 @@ export default {
             let self = this, code = Utils.getUrlParam('code');
             if (!code) return self.redirect();
 
-            let url = config.api.wechat.webToken;
-            let method = 'GET';
-            let data = { code: code };
-
-            return send(url, method, data).then((token)=>{
+            return request({
+                method: 'GET',
+                url: apiMap.wechat.webToken,
+                render: Render._default,
+                params: { code },
+                data: {}
+            }).then(token => {
                 sessionStorage.setItem('token',  JSON.stringify(token));
                 return Promise.resolve(token);
-            }).catch((err) => {
+            }).catch(err => {
                 console.error(err);
                 self.redirect();
             });
@@ -145,9 +174,7 @@ export default {
                 'scope': 'snsapi_userinfo',
                 'connect_redirect': '1#wechat_redirect'
             };
-            let query = '';
-            for(let key in data){query += key + '=' + data[key] + '&'}
-            query = Utils.trim(query,'&');
+            let query = Utils.http_build_query(data);
             url = url + '?' + query;
             window.location = url;
         },
@@ -158,22 +185,35 @@ export default {
          * @returns {Promise.<TResult>}
          */
         userinfo(){
-            return this.webToken().then((res) =>{
-                let url = config.api.wechat.userInfo;
-                let method = 'GET';
-                let data = {
-                    token: res.access_token,
-                    openid: res.openid
-                };
-                return send(url, method, data);
+            return this.webToken().then(res =>{
+                return request({
+                    method: 'GET',
+                    url: apiMap.wechat.userInfo,
+                    render: Render._default,
+                    params: {
+                        token: res.access_token,
+                        openid: res.openid
+                    },
+                    data: { }
+                });
             })
         },
 
+        /**
+         * 解析 code 中带的信息
+         * @param encryptCode
+         * @returns {Promise<T>}
+         */
         decryptCode(encryptCode){
-            let url = config.api.wechat.decryptCode;
-            let method = 'POST';
-            let data = {encrypt: encryptCode};
-            return send(url, method, data);
+            return request({
+                method: 'POST',
+                url: apiMap.wechat.decryptCode,
+                render: Render._default,
+                params: { },
+                data: {
+                    encrypt: encryptCode
+                }
+            })
         },
 
     }

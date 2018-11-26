@@ -30,6 +30,7 @@ gulp server
 /wechat/index       微信公众号网页开发样例
 /api/index          Node端接口样例
 /index/bootstrap    React-Bootstrap页面样例
+/index/vue          Vue学习样例界面
 ```
 
 文件目录
@@ -83,6 +84,7 @@ gulp server
 1. [React.js框架](http://reactjs.cn/react/docs/getting-started-zh-CN.html)
 2. [Lodash工具类库](https://www.lodashjs.com/)
 3. [Request.js - HTTP请求库](https://github.com/request/request#requestoptions-callback)
+4. [Axios.js - 基于 Promise 的HTTP库](https://github.com/axios/axios)
 
 **常用工具**
 
@@ -106,6 +108,10 @@ gulp server
 10. [使用Babel体验下一代JS语法](https://babeljs.cn/)
 11. [Ant Design](https://ant.design/)
 12. [React-Bootstrap](https://react-bootstrap.github.io/)
+
+**经验**
+1. [JSON-Bigint - 解决JS中大数精度丢失问题](https://www.npmjs.com/package/json-bigint)
+2. [IOS中Date函数初始化时间格式不兼容的问题](https://stackoverflow.com/questions/13363673/javascript-date-is-invalid-on-ios)
 
 **第三方**
 
