@@ -171,4 +171,17 @@ export default {
         isIOS: userAgent.indexOf('iPhone') > -1 || userAgent.indexOf('iPad') > -1, // 是否为iOS
     },
 
+    /**
+     * 等待
+     * @param millionSeconds
+     * @returns {Promise<any>}
+     */
+    wait: (millionSeconds = 3000) => {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve(true)
+            }, millionSeconds)
+        })
+    }
+
 }

@@ -8,15 +8,13 @@ Frontend - 学习、构建和编写Web前端页面
 >
 > 安装 node.js v8.0.0 或以上，以获取 node 端的 ES6 语法支持
 >
-> 通过 `npm install -g gulp` 安装 `gulp` 进行项目构建
+> 通过 `yarn global add gulp` 安装 `gulp` 进行项目构建
 >
-> 通过 `npm install` 安装 `npm` 依赖
+> 通过 `yarn` 安装依赖
 > 
 > **可选**
 >
-> 通过 `npm install -g pm2` 安装 `pm2` 管理Node应用进程
->
-> 通过 `npm install npm@lastest -g` 将 `npm` 更新到最新版本
+> 通过 `yarn global add pm2` 安装 `pm2` 管理Node应用进程
 
 2.启动测试服务
 > 在命令行状态下进入到项目根目录
@@ -67,12 +65,98 @@ gulp server
 
 ```
 
+Socket 协议参考
+---------------
+**请求参数（页端向服务端发起）**
+
+| 参数名称 | 类型 | 描述 |
+| --- |  --- | --- |
+| id |  String | 请求唯一id，由客户端生成，无特定规则，只要能唯一标识请求即可 |
+| reqType |  String | 请求类型. **req** 表示单次请求，**sub** 表示订阅某类数据 |
+| api |  String | socket 接口 api, 对比 RESTful 中 URL 的 PATH |
+| data |  Object | 接口请求数据 |
+
+**返回参数（服务端向页端返回）**
+
+| 参数名称 | 是否必返回 | 类型 | 描述 |
+| --- | --- | --- | --- |
+| id | false | String | 当请求类型为req时返回，对应请求中的id |
+| api | true | String | 对应请求中的api |
+| dataId | false | String | 当信息为订阅信息时返回，表示订阅的数据结构标识 |
+| reqType | true | String | 对应请求中的reqType |
+| code | true | int | 状态码，0:成功 |
+| msg | false | String | 状态码描述信息 |
+| data | false | String | 返回的数据 |
+
+**订阅**
+``` json
+# ①
+# 订阅请求（页端发起）
+{
+	id: '4415297e3af8c',
+	reqType: 'sub',
+	api: 'socket/v1/example',
+	data: {
+		reqData: 'subscribe data'
+	}
+}
+
+# ②
+# 订阅请求返回（服务端确认收到订阅请求）
+# 只有订阅的确认返回里面同时具有 id 和 dataId 字段
+{
+	id: '4415297e3af8c',
+	reqType: 'sub',
+	api: 'socket/v1/example',
+	dataId: '5c7c92c1d2d8e',
+	code: 0
+}
+
+# ③
+# 订阅数据返回（页端收到的服务端推送订阅数据）
+{
+	api: 'socket/v1/example',
+	reqType: 'sub',
+	dataId: '5c7c92c1d2d8e',
+	code: 0
+	data: {
+		subData: 'value'
+	}
+}
+```
+**请求**
+``` json
+# ①
+# 单次请求（页端发起）
+{
+	id: '5c7c955607ab5',
+	reqType: 'req',
+	api: 'socket/v1/request',
+	data: {
+		reqData: 'request data'
+	}
+}
+
+# ②
+# 单次请求的返回（服务端返回）
+{
+	id: '5c7c955607ab5',
+	reqType: 'req',
+	api: 'socket/v1/example',
+	data: {
+	    response:'response data'
+	},
+	code: 0
+}
+
+```
+
 参考文档
 ---------------
 **基础**
 
 0. [NodeJS中文网](http://nodejs.cn/)
-1. [NPM官网](https://www.npmjs.com)
+1. [Yarn官网](https://yarnpkg.com/zh-Hans/)
 2. [Jade语法参考文档](http://naltatis.github.io/jade-syntax-docs/)
 3. [Less参考文档](http://lesscss.cn/)
 4. [使用下一代JS语法: ES6](https://www.cnblogs.com/Wayou/p/es6_new_features.html)
@@ -82,9 +166,10 @@ gulp server
 
 0. [Bootstrap参考文档](http://v3.bootcss.com/)
 1. [React.js框架](http://reactjs.cn/react/docs/getting-started-zh-CN.html)
-2. [Lodash工具类库](https://www.lodashjs.com/)
-3. [Request.js - HTTP请求库](https://github.com/request/request#requestoptions-callback)
-4. [Axios.js - 基于 Promise 的HTTP库](https://github.com/axios/axios)
+2. [Vue前端MVVC框架](http://cn.vuejs.org/)
+3. [Lodash工具类库](https://www.lodashjs.com/)
+4. [Request.js - HTTP请求库](https://github.com/request/request#requestoptions-callback)
+5. [Axios.js - 基于 Promise 的HTTP库](https://github.com/axios/axios)
 
 **常用工具**
 
@@ -99,17 +184,16 @@ gulp server
 2. [log4js参考文档](https://github.com/nomiddlename/log4js-node/wiki)
 3. [Markdown语法参考文档](http://wowubuntu.com/markdown)
 4. [Markdown在线编写](https://maxiang.io/)
-5. [淘宝NPM镜像](https://npm.taobao.org/)
-6. [Vue前端MVVC框架](http://cn.vuejs.org/)
-7. [Browserify + Gulp + React](https://lincolnloop.com/blog/untangle-your-javascript-browserify/)
-8. [使用watchify加速Browserify编译](https://www.gulpjs.com.cn/docs/recipes/fast-browserify-builds-with-watchify/)
-8. [配置你的 Gulp + Browserify](https://www.npmjs.com/package/gulp-browserify)
-9. [CommonJS和AMD规范](http://javascript.ruanyifeng.com/nodejs/module.html)
-10. [使用Babel体验下一代JS语法](https://babeljs.cn/)
-11. [Ant Design](https://ant.design/)
-12. [React-Bootstrap](https://react-bootstrap.github.io/)
+5. [Browserify + Gulp + React](https://lincolnloop.com/blog/untangle-your-javascript-browserify/)
+6. [使用watchify加速Browserify编译](https://www.gulpjs.com.cn/docs/recipes/fast-browserify-builds-with-watchify/)
+7. [配置你的 Gulp + Browserify](https://www.npmjs.com/package/gulp-browserify)
+8. [CommonJS和AMD规范](http://javascript.ruanyifeng.com/nodejs/module.html)
+9. [使用Babel体验下一代JS语法](https://babeljs.cn/)
+10. [Ant Design](https://ant.design/)
+11. [React-Bootstrap](https://react-bootstrap.github.io/)
 
 **经验**
+
 1. [JSON-Bigint - 解决JS中大数精度丢失问题](https://www.npmjs.com/package/json-bigint)
 2. [IOS中Date函数初始化时间格式不兼容的问题](https://stackoverflow.com/questions/13363673/javascript-date-is-invalid-on-ios)
 
@@ -120,6 +204,7 @@ gulp server
 1. [微信公众平台](https://mp.weixin.qq.com/wiki)
 
 **Funny**
+
 0. [Yes or No](https://yesno.wtf/api)
 
 曾经使用过的工具或包
@@ -160,3 +245,10 @@ gulp server
 > 后使用 lodash.js 替换，后者是一个从 underscore fork 出来的项目
 >
 > 它方法更多，兼容性更好，从 underscore 转移非常方便。
+
+5. [NPM](https://www.npmjs.com) 以及 [淘宝NPM镜像](https://npm.taobao.org/)
+> 作为经典的包管理工具，npm为了前后兼容，以及缺乏竞争，出现了许多问题。
+>
+> 现在发现yarn对比npm , 命令更简洁，版本更准确，速度更快，所以对npm进行了替换
+>
+> 而由于yarn上包的文档是直接从npm抓取过去的，所以包的文档链接还是保留npm站点的文档链接
